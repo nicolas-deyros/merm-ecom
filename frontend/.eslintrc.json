@@ -1,0 +1,44 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react/jsx-runtime",
+		"plugin:react-hooks/recommended",
+		"plugin:prettier/recommended"
+	],
+	"overrides": [],
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["react", "react-refresh", "react-hooks", "prettier"],
+	"rules": {
+		"react-refresh/only-export-components": "warn",
+		"no-tabs": "off",
+		"no-console": "warn",
+		"prettier/prettier": [
+			"warn",
+			{
+				"trailingComma": "all",
+				"useTabs": true,
+				"tabWidth": 2,
+				"semi": false,
+				"singleQuote": true,
+				"singleAttributePerLine": false,
+				"jsxSingleQuote": true,
+				"bracketSpacing": true,
+				"bracketSameLine": true,
+				"arrowParens": "avoid",
+				"endOfLine": "auto",
+				"htmlWhitespaceSensitivity": "ignore"
+			},
+			{
+				"usePrettierrc": false
+			}
+		]
+	}
+}
