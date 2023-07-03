@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useGetProductsQuery } from '../slices/productsApiSlice'
 import {
 	Heading,
 	Grid,
@@ -10,39 +9,21 @@ import {
 	AlertDescription,
 } from '@chakra-ui/react'
 import ProductCard from '../components/ProductCard.jsx'
-// import { listProducts } from '../actions/productActions.js'
 import PageTemplate from '../templates/PageTemplate'
 
 const Home = () => {
-	const dispatch = useDispatch()
-
-	const productList = useSelector(state => state.productList)
-
-	const { loading, error, products } = productList
-
-	useEffect(() => {
-		dispatch(listProducts())
-	}, [dispatch])
-
-	const numRows = products ? Math.ceil(products.length / 5) : 0
+	const { data: products, error, isLoading } = useGetProductsQuery()
+	const numRows = Math.ceil(products?.length / 5)
 	const rowTemplate = `repeat(${numRows}, 1fr)`
+	const sortedProducts = products?.sort(a => (a.inStock ? -1 : 1)) || []
 
-	const sortedProducts = [...products].sort((a, b) => {
-		if (a.countInStock === 0 && b.countInStock > 0) {
-			return 1
-		} else if (a.countInStock > 0 && b.countInStock === 0) {
-			return -1
-		} else {
-			return 0
-		}
-	})
 	return (
 		<PageTemplate>
 			<Box>
 				<Heading as='h2' size='xl' my={3}>
-					Latest Produts
+					Latest Products
 				</Heading>
-				{loading ? (
+				{isLoading ? (
 					<Box
 						height='100vh'
 						display='flex'
@@ -62,7 +43,7 @@ const Home = () => {
 				) : error ? (
 					<Alert status='error'>
 						<AlertIcon />
-						<AlertDescription>{error}</AlertDescription>
+						<AlertDescription>{error?.message || error.error}</AlertDescription>
 					</Alert>
 				) : (
 					<Grid
@@ -74,7 +55,7 @@ const Home = () => {
 							'repeat(5, 1fr)',
 						]}
 						templateRows={rowTemplate}
-						justifyItems={['center', 'center', 'center', 'center', 'stretch']}
+						justifyItems='center'
 						gap={3}>
 						{sortedProducts.map(product => (
 							<ProductCard key={product._id} product={product} />
