@@ -1,6 +1,8 @@
 import { PRODUCTS_URL } from '../constants'
 import { apiSlice } from './apiSlice'
 
+console.log('PRODUCTS_URL', PRODUCTS_URL)
+
 export const productsApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 		getProducts: builder.query({

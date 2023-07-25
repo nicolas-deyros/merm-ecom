@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 dotenv.config()
-// import cors from 'cors'
+import cors from 'cors'
 import colors from 'colors'
 import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
@@ -19,18 +19,18 @@ const app = express()
 
 app.use(express.json())
 
-// const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5000']
-// app.use(
-// 	cors({
-// 		origin: function (origin, callback) {
-// 			if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-// 				callback(null, true)
-// 			} else {
-// 				callback(new Error('Not allowed by CORS'))
-// 			}
-// 		},
-// 	})
-// )
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5000']
+app.use(
+	cors({
+		origin: function (origin, callback) {
+			if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+				callback(null, true)
+			} else {
+				callback(new Error('Not allowed by CORS'))
+			}
+		},
+	})
+)
 
 app.get('/', (req, res) => {
 	res.send('API is running...')

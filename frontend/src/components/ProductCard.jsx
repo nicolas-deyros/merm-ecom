@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { Box, Image, Badge } from '@chakra-ui/react'
 import Rating from './Rating'
-import { For } from 'million/react'
 
 const ProductCard = ({ product }) => {
 	const {
@@ -59,13 +58,9 @@ const ProductCard = ({ product }) => {
 						{name}
 					</Box>
 					{numReviews > 0 ? (
-						<For each={rating}>
-							<Rating rating={rating} text={`${numReviews} reviews`} />
-						</For>
+						<Rating rating={rating} text={`${numReviews} reviews`} />
 					) : (
-						<For each={rating}>
-							<Rating rating={rating} text={`${numReviews} reviews`} />
-						</For>
+						<Rating rating={rating} text={`${numReviews} reviews`} />
 					)}
 					<Box d='flex' mt='1' alignItems='center'>
 						<Box as='span' color='gray.600' fontSize='lg' fontWeight={500}>

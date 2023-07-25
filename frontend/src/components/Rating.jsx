@@ -5,9 +5,8 @@ import {
 	TiStarHalfOutline,
 	TiStarOutline,
 } from 'react-icons/ti'
-import { block } from 'million/react'
 
-const Rating = block(({ rating, text }) => {
+const Rating = ({ rating, text }) => {
 	const fullStars = Math.floor(rating)
 	const halfStars = Math.round(rating - fullStars)
 	const emptyStars = 5 - fullStars - halfStars
@@ -40,7 +39,7 @@ const Rating = block(({ rating, text }) => {
 			</Box>
 		</Box>
 	)
-})
+}
 
 Rating.defaultProps = {
 	rating: 0,

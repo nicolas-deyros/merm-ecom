@@ -15,7 +15,11 @@ const Home = () => {
 	const { data: products, error, isLoading } = useGetProductsQuery()
 	const numRows = Math.ceil(products?.length / 5)
 	const rowTemplate = `repeat(${numRows}, 1fr)`
-	const sortedProducts = products?.sort(a => (a.inStock ? -1 : 1)) || []
+	const sortedProducts =
+		products
+			?.slice()
+			.sort((a, b) => (a.countInStock ? -1 : 1) - (b.countInStock ? -1 : 1)) ||
+		[]
 
 	return (
 		<PageTemplate>
