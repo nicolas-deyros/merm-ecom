@@ -12,7 +12,7 @@ import ProductCard from '../components/ProductCard.jsx'
 import PageTemplate from '../templates/PageTemplate'
 
 const Home = () => {
-	const { data: products, error, isLoading } = useGetProductsQuery()
+	const { data: products, isLoading, isError } = useGetProductsQuery()
 	const numRows = Math.ceil(products?.length / 5)
 	const rowTemplate = `repeat(${numRows}, 1fr)`
 	const sortedProducts =
@@ -44,10 +44,12 @@ const Home = () => {
 						/>
 						<span>Loading...</span>
 					</Box>
-				) : error ? (
+				) : isError ? (
 					<Alert status='error'>
 						<AlertIcon />
-						<AlertDescription>{error?.message || error.error}</AlertDescription>
+						<AlertDescription>
+							{isError?.message || isError.error}
+						</AlertDescription>
 					</Alert>
 				) : (
 					<Grid

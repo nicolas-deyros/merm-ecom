@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { configureStore } from '@reduxjs/toolkit'
 import { apiSlice } from './slices/apiSlice'
 
@@ -7,7 +8,7 @@ const store = configureStore({
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(apiSlice.middleware),
-	devTools: true,
+	devTools: process.env.NODE_ENV === 'development' ? true : false,
 })
 
 export default store
